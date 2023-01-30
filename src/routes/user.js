@@ -73,4 +73,16 @@ router.put("/:id", async (request, response) => {
   }
 });
 
+//_____________________delete________________
+router.delete("/:id", async (request, response) => {
+  const { id } = request.params;
+
+  try {
+    const removed = await userSchema.deleteOne({ _id: id });
+    response.json(removed);
+  } catch (error) {
+    response.json(error);
+  }
+});
+
 module.exports = router;
