@@ -1,22 +1,63 @@
 const { request, response } = require("express");
 const express = require("express");
-const userSchema = require("../models/user");
+const user = require("../models/user");
 const router = express.Router();
+const bcrypt = require("bcrypt");
+const moment = require("moment")
+const config = require("../config");
+
+const saltRounds = config.SALT_ROUNDS;
 
 router.post("/", async (request, response) => {
-  const user = userSchema(request.body);
+
+  let hashedPassword = bcrypt.hashSync(request.body.password, Number(saltRounds))
+  const newUser = new user({
+    _id: request.body._id,
+    name: request.body.name,
+    surname: request.body.surname,
+    password: hashedPassword,
+    email: request.body.email,
+    amigos: [], 
+    seguidores: [],
+    picture: request.body.picture,
+    registro: moment().format('DD/MM/YYYY').toString(),
+    web:request.body.web
+})
+
   try {
-    const userSaved = await user.save();
+    const userSaved = await newUser.save();
     response.json(userSaved);
   } catch (error) {
-    response.json(error);
+    response.json({message:error});
+  }
+});
+
+//_____________________Login_____________________
+
+router.post("/login", async (request, response) => {
+
+  const {_id,password} = request.body
+
+  try {
+
+    const userFinded = await user.findById(_id);
+    const validPassword = await bcrypt.compare(password,userFinded.password)
+
+    if (validPassword) {
+      response.json({message:"logged"})
+    }else{
+      response.json({message:"not logged"})
+    }
+
+  } catch (error) {
+    response.json({message:error});
   }
 });
 
 //_____________________gets__________________________
 router.get("/", async (request, response) => {
   try {
-    const users = await userSchema.find();
+    const users = await user.find();
     response.json(users);
   } catch (error) {
     response.json(error);
@@ -27,7 +68,7 @@ router.get("/:id", async (request, response) => {
   const { id } = request.params;
 
   try {
-    const userFinded = await userSchema.findById(id);
+    const userFinded = await user.findById(id);
     response.json(userFinded);
   } catch (error) {
     response.json(error);
@@ -50,7 +91,7 @@ router.put("/:id", async (request, response) => {
   } = request.body;
 
   try {
-    const updated = await userSchema.updateOne(
+    const updated = await user.updateOne(
       { _id: id },
       {
         $set: {
@@ -78,7 +119,7 @@ router.delete("/:id", async (request, response) => {
   const { id } = request.params;
 
   try {
-    const removed = await userSchema.deleteOne({ _id: id });
+    const removed = await user.deleteOne({ _id: id });
     response.json(removed);
   } catch (error) {
     response.json(error);
