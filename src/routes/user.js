@@ -30,7 +30,7 @@ router.get("/:id", async (request, response) => {
     const userFinded = await userSchema.findById(id);
     response.json(userFinded);
   } catch (error) {
-    response.json({ message: error });
+    response.json(error);
   }
 });
 
