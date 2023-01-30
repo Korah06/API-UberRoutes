@@ -1,0 +1,22 @@
+###Crear un usuario
+POST http://localhost:9999/users/ HTTP/1.1
+Content-Type: application/json
+
+{
+   "_id":"NikCannotDie",
+   "name":"Nikolai",
+   "surname":"Belinski",
+   "email":"nik@US.com",
+   "password":"Nikolai",
+   "followers":"40",
+   "picture" :"ejemplo",
+   "registro":"registro",
+   "web":"httpJAJAJA"
+}
+
+###Obtener todos los usuarios
+GET http://localhost:9999/users/ HTTP/1.1
+
+
+###
+GET http://localhost:9999/users/NikCannotDie HTTP/1.1
