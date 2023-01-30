@@ -3,12 +3,12 @@ POST http://localhost:9999/users/ HTTP/1.1
 Content-Type: application/json
 
 {
-   "_id":"NikCannotDie",
-   "name":"Nikolai",
-   "surname":"Belinski",
-   "email":"nik@US.com",
-   "password":"Nikolai",
-   "followers":"40",
+   "_id":"DempseyTank",
+   "name":"Dempsey",
+   "surname":"Tank",
+   "email":"Demp@USA.com",
+   "password":"Dempsey",
+   "followers":"70",
    "picture" :"ejemplo",
    "registro":"registro",
    "web":"httpJAJAJA"

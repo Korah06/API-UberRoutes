@@ -3,42 +3,39 @@ const express = require("express");
 const userSchema = require("../models/user");
 const router = express.Router();
 
-router.post("/", (request, response) => {
+router.post("/", async (request, response) => {
   const user = userSchema(request.body);
-  user
-    .save()
-    .then((data) => response.json(data))
-    .catch((error) => {
-      response.json({ message: error });
-    });
+  try {
+    const userSaved = await user.save();
+    response.json(userSaved);
+  } catch (error) {
+    response.json(error);
+  }
 });
 
 //_____________________gets__________________________
-router.get("/", (request, response) => {
-  userSchema
-    .find()
-    .then((data) => {
-      response.json(data);
-    })
-    .catch((error) => {
-      response.json({ message: error });
-    });
+router.get("/", async (request, response) => {
+  try {
+    const users = await userSchema.find();
+    response.json(users);
+  } catch (error) {
+    response.json(error);
+  }
 });
 
-router.get("/:id", (request, response) => {
+router.get("/:id", async (request, response) => {
   const { id } = request.params;
-  userSchema
-    .findById(id)
-    .then((data) => {
-      response.json(data);
-    })
-    .catch((error) => {
-      response.json({ message: error });
-    });
+
+  try {
+    const userFinded = await userSchema.findById(id);
+    response.json(userFinded);
+  } catch (error) {
+    response.json({ message: error });
+  }
 });
 
 //____________________________Updates______________________
-router.put("/:id", (request, response) => {
+router.put("/:id", async (request, response) => {
   const { id } = request.params;
   const {
     name,
@@ -51,8 +48,9 @@ router.put("/:id", (request, response) => {
     registro,
     web,
   } = request.body;
-  userSchema
-    .updateOne(
+
+  try {
+    const updated = await userSchema.updateOne(
       { _id: id },
       {
         $set: {
@@ -67,13 +65,12 @@ router.put("/:id", (request, response) => {
           web,
         },
       }
-    )
-    .then((data) => {
-      response.json(data);
-    })
-    .catch((error) => {
-      response.json({ message: error });
-    });
+    );
+
+    response.json(updated);
+  } catch (error) {
+    response.json(error);
+  }
 });
 
 module.exports = router;
