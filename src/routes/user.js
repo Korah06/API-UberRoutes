@@ -3,34 +3,18 @@ const express = require("express");
 const user = require("../models/user");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const moment = require("moment")
 const config = require("../config");
 const token = require("../middleware/authTokens")
+const users = require("../middleware/userFunc")
 
-
-const saltRounds = config.SALT_ROUNDS;
-
+//________________Register__________________
 
 router.post("/", async (request, response) => {
 
-  let hashedPassword = await bcrypt.hash(request.body.password, Number(saltRounds))
-  const newUser = new user({
-    _id: request.body._id,
-    name: request.body.name,
-    surname: request.body.surname,
-    password: hashedPassword,
-    email: request.body.email,
-    amigos: [], 
-    seguidores: [],
-    picture: request.body.picture,
-    registro: moment().format('DD/MM/YYYY').toString(),
-    web:request.body.web
-})
-
   try {
-    
+    const newUser = await users.create(request)    
     const userSaved = await newUser.save();
-    response.json(userSaved);
+    response.json({status:"ok",user:userSaved});
   } catch (error) {
     response.json({message:error});
   }
@@ -39,23 +23,7 @@ router.post("/", async (request, response) => {
 //_____________________Login_____________________
 
 router.post("/login", async (request, response) => {
-
-  const {_id,password} = request.body
-
-  try {
-
-    const userFinded = await user.findById(_id);
-    const validPassword = await bcrypt.compare(password,userFinded.password)
-    if (validPassword) {
-      const Token = token.create(_id)
-      response.json({message:"logged",token:Token})
-    }else{
-      response.json({message:"not logged"})
-    }
-
-  } catch (error) {
-    response.json({message:error});
-  }
+    await users.login(request,response)
 });
 
 //_____________________gets__________________________
@@ -88,9 +56,9 @@ router.put("/:id", async (request, response) => {
     email,
     password,
     amigos,
-    seguidores,
+    followers,
     picture,
-    registro,
+    register,
     web,
   } = request.body;
 
@@ -104,9 +72,9 @@ router.put("/:id", async (request, response) => {
           email,
           password,
           amigos,
-          seguidores,
+          followers,
           picture,
-          registro,
+          register,
           web,
         },
       }

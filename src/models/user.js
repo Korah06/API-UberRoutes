@@ -24,7 +24,7 @@ const userSchema = mongoose.Schema({
     type: [String],
     required: true,
   },
-  seguidores: {
+  followers: {
     type: [String],
     required: true,
   },
@@ -32,7 +32,7 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  registro: {
+  register: {
     type: String,
     required: true,
   },

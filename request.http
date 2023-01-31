@@ -3,7 +3,7 @@ POST http://localhost:9999/users/ HTTP/1.1
 Content-Type: application/json
 
 {
-   "_id":"DempseyTank",
+   "_id":"DempseyTank2",
    "name":"Dempsey",
    "surname":"Tank",
    "email":"Demp@USA.com",
@@ -46,6 +46,6 @@ POST http://localhost:9999/users/login HTTP/1.1
 Content-Type: application/json
 
 {
-   "_id":"DempseyTank",
+   "_id":"DempseyTank2",
    "password":"Dempsey"
 }
