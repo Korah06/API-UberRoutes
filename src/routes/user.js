@@ -1,16 +1,19 @@
-const { request, response } = require("express");
+const { request, response, application } = require("express");
 const express = require("express");
 const user = require("../models/user");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const moment = require("moment")
 const config = require("../config");
+const token = require("../middleware/authTokens")
+
 
 const saltRounds = config.SALT_ROUNDS;
 
+
 router.post("/", async (request, response) => {
 
-  let hashedPassword = bcrypt.hashSync(request.body.password, Number(saltRounds))
+  let hashedPassword = await bcrypt.hash(request.body.password, Number(saltRounds))
   const newUser = new user({
     _id: request.body._id,
     name: request.body.name,
@@ -25,6 +28,7 @@ router.post("/", async (request, response) => {
 })
 
   try {
+    
     const userSaved = await newUser.save();
     response.json(userSaved);
   } catch (error) {
@@ -42,9 +46,9 @@ router.post("/login", async (request, response) => {
 
     const userFinded = await user.findById(_id);
     const validPassword = await bcrypt.compare(password,userFinded.password)
-
     if (validPassword) {
-      response.json({message:"logged"})
+      const Token = token.create(_id)
+      response.json({message:"logged",token:Token})
     }else{
       response.json({message:"not logged"})
     }

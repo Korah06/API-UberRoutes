@@ -9,7 +9,7 @@ Content-Type: application/json
    "email":"Demp@USA.com",
    "password":"Dempsey",
    "followers":"70",
-   "picture" :2,
+   "picture" :"as",
    "web":"httpJAJAJA"
 }
 
@@ -38,7 +38,7 @@ Content-Type: application/json
 }
 
 ###eliminar usuario
-DELETE http://localhost:9999/users/DempseyTank HTTP/1.1
+DELETE http://localhost:9999/users/DempseyTank2 HTTP/1.1
 
 
 ###sim login
