@@ -2,8 +2,8 @@ const user = require("../models/user");
 const moment = require("moment");
 const crypt = require("./crypt")
 const token = require("./authTokens")
-create = async (req)=>{
 
+create = async (req)=>{
 try {
    let hashedPassword = await crypt.createCrypt(req.body.password)
    const newUser = new user({
@@ -19,12 +19,10 @@ try {
     web:req.body.web
 })
 return newUser;
-   
 } catch (error) {
    return null
 }
 }
-
 
 login = async (req,res)=>{
    try {
@@ -36,19 +34,56 @@ login = async (req,res)=>{
    
     if (validPassword) {
       const Token = token.create(_id)
-      res.json({message:"logged",token:Token})
+      res.json({status:"200",token:Token})
     }else{
-      res.json({message:"not logged"})
+      res.json({status:"401"})
     }
 
    } catch (error) {
-      res.json({message:"No existe ese usuario",error:error})
+      res.json({status:"404",error:error})
    }
-   
+}
+
+update = async (req,res)=>{
+  try {
+   const { id } = req.params;
+   const {
+    name,
+    surname,
+    email,
+    password,
+    amigos,
+    followers,
+    picture,
+    register,
+    web,
+  } = req.body;
+
+   const updated = await user.updateOne(
+     { _id: id },
+     {
+       $set: {
+         name,
+         surname,
+         email,
+         password,
+         amigos,
+         followers,
+         picture,
+         register,
+         web,
+       },
+     }
+   );
+   res.json({status:"200",user:updated});
+ } catch (error) {
+   res.json({status:"500",message:"No se ha podido actualizar"});
+ }
 
 }
 
 module.exports = {
    create,
-   login
+   login,
+   update
 }

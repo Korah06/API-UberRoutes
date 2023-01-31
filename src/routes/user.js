@@ -2,15 +2,11 @@ const { request, response, application } = require("express");
 const express = require("express");
 const user = require("../models/user");
 const router = express.Router();
-const bcrypt = require("bcrypt");
-const config = require("../config");
-const token = require("../middleware/authTokens")
 const users = require("../middleware/userFunc")
 
 //________________Register__________________
 
 router.post("/", async (request, response) => {
-
   try {
     const newUser = await users.create(request)    
     const userSaved = await newUser.save();
@@ -38,7 +34,6 @@ router.get("/", async (request, response) => {
 
 router.get("/:id", async (request, response) => {
   const { id } = request.params;
-
   try {
     const userFinded = await user.findById(id);
     response.json(userFinded);
@@ -49,47 +44,12 @@ router.get("/:id", async (request, response) => {
 
 //____________________________Updates______________________
 router.put("/:id", async (request, response) => {
-  const { id } = request.params;
-  const {
-    name,
-    surname,
-    email,
-    password,
-    amigos,
-    followers,
-    picture,
-    register,
-    web,
-  } = request.body;
-
-  try {
-    const updated = await user.updateOne(
-      { _id: id },
-      {
-        $set: {
-          name,
-          surname,
-          email,
-          password,
-          amigos,
-          followers,
-          picture,
-          register,
-          web,
-        },
-      }
-    );
-
-    response.json(updated);
-  } catch (error) {
-    response.json(error);
-  }
+  await users.update(request,response)
 });
 
 //_____________________delete________________
 router.delete("/:id", async (request, response) => {
   const { id } = request.params;
-
   try {
     const removed = await user.deleteOne({ _id: id });
     response.json(removed);

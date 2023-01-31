@@ -31,14 +31,14 @@ Content-Type: application/json
    "surname":"Belinski",
    "email":"nik@US.com",
    "password":"Nikolai",
-   "followers":"40",
+   "followers":"ejemplo",
    "picture" :"ejemplo",
    "registro":"registro",
    "web":"webhttp"
 }
 
 ###eliminar usuario
-DELETE http://localhost:9999/users/DempseyTank2 HTTP/1.1
+DELETE http://localhost:9999/users/NikCannotDie HTTP/1.1
 
 
 ###sim login
