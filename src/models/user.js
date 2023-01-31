@@ -20,11 +20,11 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  amigos: {
+  frieds: {
     type: [String],
     required: true,
   },
-  seguidores: {
+  followers: {
     type: [String],
     required: true,
   },
@@ -32,7 +32,7 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  registro: {
+  register_date: {
     type: String,
     required: true,
   },
