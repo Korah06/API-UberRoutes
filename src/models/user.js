@@ -32,7 +32,7 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  register_date: {
+  register: {
     type: String,
     required: true,
   },
