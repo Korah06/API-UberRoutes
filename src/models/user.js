@@ -20,7 +20,7 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  friends: {
+  following: {
     type: [String],
     required: true,
   },
