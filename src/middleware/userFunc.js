@@ -44,6 +44,13 @@ login = async (req,res)=>{
    }
 }
 
+register = async (userRegistered,res) =>{
+
+   const Token = token.create(userRegistered._id)
+      res.json({status:"200",token:Token})
+
+}
+
 update = async (req,res)=>{
   try {
    const { id } = req.params;
@@ -85,5 +92,6 @@ update = async (req,res)=>{
 module.exports = {
    create,
    login,
-   update
+   update,
+   register
 }

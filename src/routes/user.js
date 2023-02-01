@@ -10,7 +10,7 @@ router.post("/", async (request, response) => {
   try {
     const newUser = await users.create(request)    
     const userSaved = await newUser.save();
-    response.json({status:"ok",user:userSaved});
+    await users.register(newUser,response)
   } catch (error) {
     response.json({message:error});
   }
