@@ -6,7 +6,7 @@ const users = require("../middleware/userFunc")
 
 //________________Register__________________
 
-router.post("/", async (request, response) => {
+router.post("/register", async (request, response) => {
   try {
     const newUser = await users.create(request)    
     const userSaved = await newUser.save();

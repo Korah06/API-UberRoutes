@@ -34,7 +34,7 @@ login = async (req,res)=>{
    
     if (validPassword) {
       const Token = token.create(_id)
-      res.json({status:"200",token:Token})
+      res.json({status:"200",token:Token,data:userFinded})
     }else{
       res.json({status:"401"})
     }

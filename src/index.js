@@ -10,9 +10,6 @@ const connection = require("../db/database");
 app.use(express.json());
 app.use("/users", userRoutes);
 
-app.get("/", (request, response) => {
-  response.send("Hello");
-});
 
 //connection mongoDB
 connection();
