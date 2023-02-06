@@ -10,11 +10,11 @@ const postSchema = mongoose.Schema({
     required: true
   },
   date: {
-    type: moment().format("DD/MM/YYYY").toString(),
+    type: String,
     required: true
   },
   time: {
-    type: moment().format("HH:mm:ss").toString(),
+    type: String,
     required: true
   },
   category: {
@@ -34,7 +34,7 @@ const postSchema = mongoose.Schema({
     required: true
   },
   images: {
-    type: String,
+    type: [String],
     required: true
   },
   privacy: {
