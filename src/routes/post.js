@@ -28,7 +28,7 @@ router.get("/", async (request, response) => {
 router.get("/:id", async (request, response) => {
     const { id } = request.params;
     try {
-        const postFinded = await user.findById(id);
+        const postFinded = await post.findById(id);
         response.json({status:"ok",data:postFinded});
     } catch (error) {
         response.json(error);
