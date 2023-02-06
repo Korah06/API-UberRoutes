@@ -50,3 +50,23 @@ Content-Type: application/json
    "_id":"DempseyTank2",
    "password":"Dempsey"
 }
+
+###get posts
+GET http://localhost:9999/posts HTTP/1.1
+
+###Crear un usuario
+POST http://localhost:9999/posts/create HTTP/1.1
+Content-Type: application/json
+
+{
+   "_id":"Ruta1",
+   "description":"descripcion",
+   "category":"a pie",
+   "distance":"10 Km",
+   "difficulty":"dificil",
+   "duration":"1 hora",
+   "images":[],
+   "privacy" :"publica",
+   "user":"usuario",
+   "url":"url"
+}
