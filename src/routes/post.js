@@ -13,7 +13,7 @@ const app = express();
 router.post("/create", async (request, response) => {
     try {
       const newPost = await posts.create(request)    
-      const postSaved = await newPost.save();
+      await newPost.save();
       response.json({status:"200",message:"Post creado correctamente"})
     } catch (error) {
       response.json({message:error});

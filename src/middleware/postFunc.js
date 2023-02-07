@@ -4,15 +4,14 @@ const moment = require("moment");
 create = async (req)=>{
     try {
        const newPost = new post({
-        _id: req.body._id,
+        name: req.body.name,
         description: req.body.description,
         date: moment().format("DD/MM/YYYY").toString(),
-        time: moment().format("HH:mm:ss").toString(),
         category: req.body.category,
         distance: req.body.distance, 
         difficulty: req.body.difficulty,
         duration: req.body.duration,
-        images: [],
+        image: req.body.image,
         privacy: req.body.privacy,
         user: req.body.user,
         url: req.body.url

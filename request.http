@@ -62,13 +62,13 @@ POST http://localhost:9999/posts/create HTTP/1.1
 Content-Type: application/json
 
 {
-   "_id":"Ruta1",
+   "name":"Ruta2",
    "description":"descripcion",
    "category":"a pie",
    "distance":"10 Km",
    "difficulty":"dificil",
    "duration":"1 hora",
-   "images":[],
+   "image":"example-post.jpg",
    "privacy" :"publica",
    "user":"usuario",
    "url":"url"

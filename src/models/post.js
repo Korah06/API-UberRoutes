@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 const moment = require("moment");
 const postSchema = mongoose.Schema({
-  _id: {
-    type: String,
-    required: false
-  },
   name:{
     type:String,
     required:true
@@ -15,7 +11,7 @@ const postSchema = mongoose.Schema({
   },
   date: {
     type: String,
-    required: true
+    required: false
   },
   category: {
     type: String,
