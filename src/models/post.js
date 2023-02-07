@@ -3,17 +3,17 @@ const moment = require("moment");
 const postSchema = mongoose.Schema({
   _id: {
     type: String,
-    required: true
+    required: false
+  },
+  name:{
+    type:String,
+    required:true
   },
   description: {
     type: String,
     required: true
   },
   date: {
-    type: String,
-    required: true
-  },
-  time: {
     type: String,
     required: true
   },
@@ -33,13 +33,17 @@ const postSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  images: {
-    type: [String],
+  image: {
+    type: String,
     required: true
   },
   privacy: {
     type: String,
     required: true
+  },
+  enterprise:{
+    type:String,
+    required:false
   },
   user: {
     type: String,
@@ -47,7 +51,7 @@ const postSchema = mongoose.Schema({
   },
   url: {
     type: String,
-    required: true
+    required: false
   }
 });
 

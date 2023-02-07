@@ -4,6 +4,8 @@ const post = require("../models/post");
 const router = express.Router();
 const posts = require("../middleware/postFunc")
 const path = require('path');
+const fs = require('fs');
+const multer  = require('multer')
 
 const app = express();
 
@@ -65,6 +67,30 @@ app.get('/img/:image', (req, res) => {
 
 
 //___________________save-img____________________
+
+// app.use(express.urlencoded({ extended: true }));
+
+// router.post('/img', (req, res) => {
+//     if (!req.file || Object.keys(req.file).length === 0) {
+//       return res.status(400).send('No files were uploaded.');
+//     }
+  
+//     let image = req.file.image;
+  
+//     let imagePath = path.join(__dirname, '../../img/post', image.name);
+//     image.mv(imagePath, function (err) {
+//       if (err) {
+//         return res.status(500).send(err);
+//       }
+  
+//       res.send('File uploaded!');
+//     });
+//   });
+
+
+
+
+
 
 
 module.exports = router;
