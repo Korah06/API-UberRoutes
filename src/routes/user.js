@@ -3,6 +3,9 @@ const express = require("express");
 const user = require("../models/user");
 const router = express.Router();
 const users = require("../middleware/userFunc")
+const path = require('path');
+
+const app = express();
 
 //________________Register__________________
 
@@ -57,5 +60,16 @@ router.delete("/:id", async (request, response) => {
     response.json(error);
   }
 });
+
+
+//__________________GET-img___________________
+
+router.use('/img',express.static(path.join(__dirname,'../../img/user')));
+
+app.get('/img/:image', (req, res) => {
+    res.sendFile(path.join(__dirname, 'img', req.params.image));
+  });
+
+
 
 module.exports = router;

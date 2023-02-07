@@ -12,6 +12,8 @@ app.use(express.json());
 app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
 
+app.use("/img",express.static("/img"))
+
 
 //connection mongoDB
 connection();

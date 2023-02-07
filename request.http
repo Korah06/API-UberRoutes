@@ -90,6 +90,9 @@ Content-Type: application/json
    "user":"usuario",
    "url":"url"
 }
-
+   
 ###eliminar usuario
 DELETE http://localhost:9999/posts/Ruta1 HTTP/1.1
+
+###Get image
+GET http://localhost:9999/img/post/example-post.jpg HTTP/1.1

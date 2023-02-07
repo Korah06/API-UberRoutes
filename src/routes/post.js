@@ -3,6 +3,9 @@ const express = require("express");
 const post = require("../models/post");
 const router = express.Router();
 const posts = require("../middleware/postFunc")
+const path = require('path');
+
+const app = express();
 
 //_________________Create______________
 router.post("/create", async (request, response) => {
@@ -50,5 +53,18 @@ router.delete("/:id", async (request, response) => {
         response.json(error);
     }
 });
+
+//___________________get-img_____________________
+
+router.use('/img',express.static(path.join(__dirname,'../../img/post')));
+
+app.get('/img/:image', (req, res) => {
+    res.sendFile(path.join(__dirname, 'img', req.params.image));
+  });
+
+
+
+//___________________save-img____________________
+
 
 module.exports = router;
