@@ -40,7 +40,7 @@ const userSchema = mongoose.Schema({
     type: String,
     required: false,
   },
-});
+},{versionKey:false});
 
 const user = mongoose.model("user", userSchema);
 

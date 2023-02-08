@@ -55,7 +55,7 @@ const postSchema = mongoose.Schema({
     required: false,
     default:"No URL"
   }
-});
+},{versionKey:false});
 
 const post = mongoose.model("post", postSchema);
 
