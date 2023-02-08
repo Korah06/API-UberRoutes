@@ -25,7 +25,7 @@ router.post("/create", async (request, response) => {
 router.get("/", async (request, response) => {
     try {
       const posts = await post.find();
-      response.json(posts);
+      response.json({"status":"200","data":posts});
     } catch (error) {
       response.json(error);
     }
