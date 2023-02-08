@@ -5,18 +5,19 @@ const router = express.Router();
 const posts = require("../middleware/postFunc")
 const path = require('path');
 const fs = require('fs');
-const multer  = require('multer')
+const multer  = require('multer');
 
 const app = express();
 
 //_________________Create______________
 router.post("/create", async (request, response) => {
     try {
-      const newPost = await posts.create(request)    
-      await newPost.save();
+      const newPost = await posts.create(request)
+      await newPost.save()
       response.json({status:"200",message:"Post creado correctamente"})
     } catch (error) {
-      response.json({message:error});
+      console.log(error)
+      response.json({status:"400" ,message:error});
     }
 });
 

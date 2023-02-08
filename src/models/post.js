@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
-const moment = require("moment");
 const postSchema = mongoose.Schema({
+  _id: {
+    type: String,
+    required: false
+  },
   name:{
     type:String,
     required:true
@@ -31,7 +34,8 @@ const postSchema = mongoose.Schema({
   },
   image: {
     type: String,
-    required: true
+    required: false,
+    default:"example-post.jpg"
   },
   privacy: {
     type: String,
@@ -39,7 +43,8 @@ const postSchema = mongoose.Schema({
   },
   enterprise:{
     type:String,
-    required:false
+    required:false,
+    default: "No enterprise"
   },
   user: {
     type: String,
@@ -47,7 +52,8 @@ const postSchema = mongoose.Schema({
   },
   url: {
     type: String,
-    required: false
+    required: false,
+    default:"No URL"
   }
 });
 

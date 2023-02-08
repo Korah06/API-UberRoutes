@@ -62,16 +62,14 @@ POST http://localhost:9999/posts/create HTTP/1.1
 Content-Type: application/json
 
 {
-   "name":"Ruta2",
+   "name":"Ruta nueva",
    "description":"descripcion",
-   "category":"a pie",
-   "distance":"10 Km",
-   "difficulty":"dificil",
-   "duration":"1 hora",
-   "image":"example-post.jpg",
-   "privacy" :"publica",
-   "user":"usuario",
-   "url":"url"
+   "category":"Ciclismo",
+   "distance":"2Km",
+   "difficulty":"hard",
+   "duration":"3h",
+   "privacy":"public",
+   "user":"DempseyTank2"
 }
 
 ###Update de post
