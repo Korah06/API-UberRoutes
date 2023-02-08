@@ -69,27 +69,20 @@ app.get('/img/:image', (req, res) => {
 
 //___________________save-img____________________
 
-// app.use(express.urlencoded({ extended: true }));
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+      cb(null, './img/post');
+    },
+  filename: function (req, file, cb) {
+      cb(null, file.originalname);
+  }
+});
 
-// router.post('/img', (req, res) => {
-//     if (!req.file || Object.keys(req.file).length === 0) {
-//       return res.status(400).send('No files were uploaded.');
-//     }
-  
-//     let image = req.file.image;
-  
-//     let imagePath = path.join(__dirname, '../../img/post', image.name);
-//     image.mv(imagePath, function (err) {
-//       if (err) {
-//         return res.status(500).send(err);
-//       }
-  
-//       res.send('File uploaded!');
-//     });
-//   });
+const upload = multer({storage: storage})
 
-
-
+router.post('/img', upload.single('image'), async (req, res) => {
+  res.status(201).send('Image uploaded succesfully')
+})
 
 
 

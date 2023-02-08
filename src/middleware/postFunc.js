@@ -4,7 +4,7 @@ const moment = require("moment");
 create = async (req)=>{
     try {
        const newPost = new post({
-        _id:req.body.name+"/"+moment().format("h:mm:ss").toString(),
+        _id:req.body.name+"-"+moment().format("DD/MM/YYYY-hh:mm:ss").toString(),
         name: req.body.name,
         description: req.body.description,
         date: moment().format("DD/MM/YYYY").toString(),
