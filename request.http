@@ -3,15 +3,16 @@ POST http://localhost:9999/users/register HTTP/1.1
 Content-Type: application/json
 
 {
-   "_id":"DempseyTask2",
-   "name":"Dempsey",
-   "surname":"Tank",
-   "email":"Demp@USA.com",
-   "password":"Dempsey",
+   "_id":"admin",
+   "name":"admin",
+   "surname":"admin",
+   "email":"admin@UberRoutes.com",
+   "password":"admin",
    "followers":[],
    "following":[],
-   "picture" :"example",
-   "web":"httpJAJAJA"
+   "picture" :"example-user.png",
+   "web":"admin.com",
+   "admin":true
 }
 
 ###Obtener todos los usuarios

@@ -29,7 +29,7 @@ router.post("/login", async (request, response) => {
 router.get("/", async (request, response) => {
   try {
     const users = await user.find();
-    response.json(users);
+    response.json({status:"200",data:users});
   } catch (error) {
     response.json(error);
   }

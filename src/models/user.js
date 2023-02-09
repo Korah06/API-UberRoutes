@@ -40,6 +40,10 @@ const userSchema = mongoose.Schema({
     type: String,
     required: false,
   },
+  admin:{
+    type:Boolean,
+    required:true,
+  },
 },{versionKey:false});
 
 const user = mongoose.model("user", userSchema);
