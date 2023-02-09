@@ -16,7 +16,8 @@ try {
     followers: [],
     picture: req.body.picture,
     register: moment().format('DD/MM/YYYY').toString(),
-    web:req.body.web
+    web:req.body.web,
+    admin:req.body.admin
 })
 return newUser;
 } catch (error) {
