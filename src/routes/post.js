@@ -7,6 +7,8 @@ const path = require('path');
 const fs = require('fs');
 const multer  = require('multer');
 
+const storage = require('../middleware/storage')
+
 const app = express();
 
 //_________________Create______________
@@ -69,16 +71,15 @@ app.get('/img/:image', (req, res) => {
 
 //___________________save-img____________________
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-      cb(null, './img/post');
-    },
-  filename: function (req, file, cb) {
-      cb(null, file.originalname);
-  }
-});
-
-const upload = multer({storage: storage})
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//       cb(null, './img/post');
+//     },
+//   filename: function (req, file, cb) {
+//       cb(null, file.originalname);
+//   }
+// });
+const upload = multer({storage:storage.storagePost})
 
 router.post('/img', upload.single('image'), async (req, res) => {
   res.status(201).send('Image uploaded succesfully')

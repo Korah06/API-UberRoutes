@@ -4,9 +4,9 @@ const user = require("../models/user");
 const router = express.Router();
 const users = require("../middleware/userFunc")
 const path = require('path');
-
+const storage = require('../middleware/storage')
 const app = express();
-
+const multer  = require('multer');
 //________________Register__________________
 
 router.post("/register", async (request, response) => {
@@ -70,6 +70,12 @@ app.get('/img/:image', (req, res) => {
     res.sendFile(path.join(__dirname, 'img', req.params.image));
   });
 
+//_____________________Post-img___________________________
+  const upload = multer({storage: storage.storageUser})
+
+  router.post('/img', upload.single('image'), async (req, res) => {
+    res.status(201).send('Image uploaded succesfully')
+  })
 
 
 module.exports = router;
