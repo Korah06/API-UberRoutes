@@ -7,7 +7,7 @@ create = async (req)=>{
 try {
    let hashedPassword = await crypt.createCrypt(req.body.password)
    const newUser = new user({
-    _id: req.body._id,
+    _id: req.body._id.replace("/","").replace("\\",""),
     name: req.body.name,
     surname: req.body.surname,
     password: hashedPassword,

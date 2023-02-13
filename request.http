@@ -63,7 +63,7 @@ POST http://localhost:9999/posts/create HTTP/1.1
 Content-Type: application/json
 
 {
-   "name":"Ruta nueva 4",
+   "name":"Ruta nueva 6",
    "description":"descripcion",
    "category":"Ciclismo",
    "distance":"2Km",

@@ -78,4 +78,25 @@ app.get('/img/:image', (req, res) => {
   })
 
 
+  router.put('/deleteimg/:id', async (req, res) => {
+    try {
+      const { id } = req.params;
+      picture = {
+        picture:"example-user.png"
+      };
+   
+      const updated = await user.updateOne(
+        { _id: id },
+        {
+          $set:picture
+        }
+      );
+      res.json({status:"200",post:updated});
+    } catch (error) {
+      res.json({status:"500",message:error});
+      console.log(error)
+    }
+  })
+
+
 module.exports = router;

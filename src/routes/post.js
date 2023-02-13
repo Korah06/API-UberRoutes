@@ -82,7 +82,28 @@ app.get('/img/:image', (req, res) => {
 const upload = multer({storage:storage.storagePost})
 
 router.post('/img', upload.single('image'), async (req, res) => {
+  console.log("ha recibido");
   res.status(201).send('Image uploaded succesfully')
+})
+
+router.put('/deleteimg/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    image = {
+      image:"example-post.jpg"
+    };
+ 
+    const updated = await post.updateOne(
+      { _id: id },
+      {
+        $set:image
+      }
+    );
+    res.json({status:"200",post:updated});
+  } catch (error) {
+    res.json({status:"500",message:error});
+    console.log(error)
+  }
 })
 
 
