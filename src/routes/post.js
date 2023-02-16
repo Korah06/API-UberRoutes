@@ -4,7 +4,6 @@ const post = require("../models/post");
 const router = express.Router();
 const posts = require("../middleware/postFunc")
 const path = require('path');
-const fs = require('fs');
 const multer  = require('multer');
 
 const storage = require('../middleware/storage')
@@ -27,7 +26,7 @@ router.post("/create", async (request, response) => {
 router.get("/", async (request, response) => {
     try {
       const posts = await post.find();
-      response.json({"status":"200","data":posts});
+      response.json({status:"200",data:posts});
     } catch (error) {
       response.json(error);
     }
@@ -43,9 +42,23 @@ router.get("/:id", async (request, response) => {
     }
 });
 
+router.post("/byuser", async (request, response) => {
+  try {
+    const{user} = request.body;
+    const posts = await post.find({user:user});
+    response.json({status:"200",data:posts});
+  } catch (error) {
+    response.json(error);
+  }
+});
+
 //_________________________Update______________________
 router.put("/:id", async (request, response) => {
     await posts.update(request,response)
+});
+
+router.put("/admupdate/:id", async (request, response) => {
+  await posts.admUpdate(request,response)
 });
 
 //_____________________delete________________

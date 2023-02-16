@@ -60,7 +60,7 @@ update = async (req,res)=>{
     surname,
     email,
     password,
-    amigos,
+    following,
     followers,
     picture,
     register,
@@ -75,7 +75,7 @@ update = async (req,res)=>{
          surname,
          email,
          password,
-         amigos,
+         following,
          followers,
          picture,
          register,
@@ -90,9 +90,40 @@ update = async (req,res)=>{
 
 }
 
+admUpdate = async (req,res)=>{
+  try {
+   const { id } = req.params;
+   const {
+    name,
+    surname,
+    web,
+    admin,
+  } = req.body;
+
+   const updated = await user.updateOne(
+     { _id: id },
+     {
+       $set: {
+          name,
+          surname,
+          web,
+          admin
+        },
+     }
+   );
+
+
+   res.json({status:"200",user:updated});
+ } catch (error) {
+  console.log(error);
+   res.json({status:"500",message:"No se ha podido actualizar"});
+ }
+}
+
 module.exports = {
    create,
    login,
    update,
-   register
+   register,
+   admUpdate
 }

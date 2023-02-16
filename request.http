@@ -3,16 +3,16 @@ POST http://localhost:9999/users/register HTTP/1.1
 Content-Type: application/json
 
 {
-   "_id":"admin",
-   "name":"admin",
-   "surname":"admin",
-   "email":"admin@UberRoutes.com",
+   "_id":"noadmin",
+   "name":"Alejandro",
+   "surname":"Gonzalez",
+   "email":"hola@UberRoutes.com",
    "password":"admin",
    "followers":[],
    "following":[],
    "picture" :"example-user.png",
    "web":"admin.com",
-   "admin":true
+   "admin":false
 }
 
 ###Obtener todos los usuarios
@@ -58,19 +58,27 @@ GET http://localhost:9999/posts HTTP/1.1
 ###get especifico
 GET http://localhost:9999/posts/Ruta1 HTTP/1.1
 
+###get de rutas por usuario
+POST http://localhost:9999/posts/byuser HTTP/1.1
+Content-Type: application/json
+
+{
+   "user":"admin"
+}
+
 ###Crear un post
 POST http://localhost:9999/posts/create HTTP/1.1
 Content-Type: application/json
 
 {
-   "name":"Ruta nueva 6",
-   "description":"descripcion",
+   "name":"Ruta de la montaña alpina",
+   "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vel magna sit amet purus molestie finibus in at enim. Phasellus elementum feugiat ultrices. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum mi ipsum, tristique luctus erat in, faucibus interdum nibh. Sed sit amet nulla a lectus vestibulum hendrerit nec eu elit. Nullam dapibus sem ex, quis placerat arcu cursus et. Ut odio turpis, semper ac felis nec, accumsan tempor nunc. Fusce mauris ante, consectetur vel fringilla vitae, rutrum id diam. Cras vitae nisi sollicitudin, vestibulum sem ut, hendrerit enim.",
    "category":"Ciclismo",
    "distance":"2Km",
    "difficulty":"hard",
    "duration":"3h",
    "privacy":"public",
-   "user":"DempseyTank2"
+   "user":"admin"
 }
 
 ###Update de post
@@ -88,6 +96,28 @@ Content-Type: application/json
    "privacy" :"publica",
    "user":"usuario",
    "url":"url"
+}
+
+###Update de post por admin
+PUT http://localhost:9999/posts/admupdate/Rutadelamontañaalpina-14-02-2023-04:14:49 HTTP/1.1
+Content-Type: application/json
+
+{
+   "name":"Ruta de la montaña alpina derrapante",   
+   "category":"bici",
+   "distance":"40 Km",
+   "difficulty":"moderado"
+}
+
+###Update de user por admin
+PUT http://localhost:9999/users/adm/adminejemplo HTTP/1.1
+Content-Type: application/json
+
+{
+   "name":"adm que vende ford ka",   
+   "surname":"jajaXD",
+   "web":"jaja",
+   "admin":true
 }
    
 ###eliminar usuario

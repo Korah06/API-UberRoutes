@@ -50,6 +50,10 @@ router.put("/:id", async (request, response) => {
   await users.update(request,response)
 });
 
+router.put("/adm/:id", async (request, response) => {
+  await users.admUpdate(request,response)
+});
+
 //_____________________delete________________
 router.delete("/:id", async (request, response) => {
   const { id } = request.params;

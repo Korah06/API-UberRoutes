@@ -29,15 +29,16 @@ update = async (req,res)=>{
      const { id } = req.params;
      const {
       description,
+      name,
       date,
-      time,
       category,
       distance,
       difficulty,
       duration,
-      images,
+      image,
       privacy,
       user,
+      enterprise,
       url
     } = req.body;
   
@@ -52,7 +53,9 @@ update = async (req,res)=>{
             distance,
             difficulty,
             duration,
-            images,
+            image,
+            name,
+            enterprise,
             privacy,
             user,
             url
@@ -65,7 +68,35 @@ update = async (req,res)=>{
    }
 }
 
+admUpdate = async (req,res)=>{
+  try {
+   const { id } = req.params;
+   const {
+    name,
+    category,
+    distance,
+    difficulty,
+  } = req.body;
+
+   const updated = await post.updateOne(
+     { _id: id },
+     {
+       $set: {
+          name,
+          category,
+          distance,
+          difficulty
+       },
+     }
+   );
+   res.json({status:"200",post:updated});
+ } catch (error) {
+   res.json({status:"500",message:"No se ha podido actualizar"});
+ }
+}
+
 module.exports = {
     create,
-    update
+    update,
+    admUpdate
  }
