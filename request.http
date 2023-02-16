@@ -123,5 +123,18 @@ Content-Type: application/json
 ###eliminar usuario
 DELETE http://localhost:9999/posts/Ruta1 HTTP/1.1
 
-###Get image
-GET http://localhost:9999/img/post/example-post.jpg HTTP/1.1
+###Get all comments
+GET http://localhost:9999/comments/ HTTP/1.1
+###Get single comment
+GET http://localhost:9999/comments/Rutadelamontañaalpina-14-02-2023-08:32:01 HTTP/1.1
+
+
+###Crear un comentario
+POST http://localhost:9999/comments/ HTTP/1.1
+Content-Type: application/json
+
+{
+   "description":"En esta ruta derrapas",
+   "user":"admin",
+   "post":"Rutadelamontañaalpina-14-02-2023-08:32:01"
+}
