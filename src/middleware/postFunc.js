@@ -7,7 +7,7 @@ create = async (req)=>{
         _id:req.body.name.replace(/\s/g, '')+"-"+moment().format("DD-MM-YYYY-hh:mm:ss").toString(),
         name: req.body.name,
         description: req.body.description,
-        date: moment().format("DD/MM/YYYY").toString(),
+        date: moment().format("DD-MM-YYYY").toString(),
         category: req.body.category,
         distance: req.body.distance, 
         difficulty: req.body.difficulty,
