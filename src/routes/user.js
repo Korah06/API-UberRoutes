@@ -1,6 +1,7 @@
 const { request, response, application } = require("express");
 const express = require("express");
 const user = require("../models/user");
+const comment = require("../models/comment");
 const router = express.Router();
 const users = require("../middleware/userFunc");
 const path = require("path");
@@ -88,6 +89,7 @@ router.delete("/:id", async (request, response) => {
     );
     if (verified) {
       const removed = await user.deleteOne({ _id: id });
+      await comment.deleteMany({ user: id });
       response.json({ status: "200", data: removed });
     } else {
       response.status(403);

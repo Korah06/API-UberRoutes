@@ -27,7 +27,6 @@ router.get("/:post", async (request, response) => {
     const verified = token.verify(
       request.headers["authorization"].split(" ")[1]
     );
-    console.log(verified);
     if (verified) {
       const { post } = request.params;
       const comments = await comment.find({ post: post });
@@ -58,7 +57,7 @@ router.post("/", async (request, response) => {
   }
 });
 
-///users?username=johndoe&email=johndoe@example.com
+//   /users?username=johndoe&email=johndoe@example.com
 router.delete("/", async (request, response) => {
   try {
     const verified = token.verify(
@@ -66,6 +65,21 @@ router.delete("/", async (request, response) => {
     );
     if (verified) {
       await comments.deleteComment(request, response);
+    } else {
+      response.status(403);
+    }
+  } catch (error) {
+    response.json({ error: error });
+  }
+});
+
+router.delete("/adm/:id", async (request, response) => {
+  try {
+    const verified = token.verify(
+      request.headers["authorization"].split(" ")[1]
+    );
+    if (verified) {
+      await comments.admDelete(request, response);
     } else {
       response.status(403);
     }
