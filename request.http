@@ -81,6 +81,21 @@ Content-Type: application/json
    "user":"admin"
 }
 
+###Crear un post2
+POST http://localhost:9999/posts/create HTTP/1.1
+Content-Type: application/json
+
+{
+   "name":"Ruta de la senderismo por aqui y por alla es una prueba por si esto es muy largo",
+   "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vel magna sit amet purus molestie finibus in at enim. Phasellus elementum feugiat ultrices. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum mi ipsum, tristique luctus erat in, faucibus interdum nibh. Sed sit amet nulla a lectus vestibulum hendrerit nec eu elit. Nullam dapibus sem ex, quis placerat arcu cursus et. Ut odio turpis, semper ac felis nec, accumsan tempor nunc. Fusce mauris ante, consectetur vel fringilla vitae, rutrum id diam. Cras vitae nisi sollicitudin, vestibulum sem ut, hendrerit enim.",
+   "category":"Senderismo",
+   "distance":"5Km",
+   "difficulty":"media",
+   "duration":"1h",
+   "privacy":"public",
+   "user":"prueba1"
+}
+
 ###Update de post
 PUT http://localhost:9999/posts/Ruta1 HTTP/1.1
 Content-Type: application/json
@@ -120,7 +135,7 @@ Content-Type: application/json
    "admin":true
 }
    
-###eliminar usuario
+###eliminar ruta
 DELETE http://localhost:9999/posts/Ruta1 HTTP/1.1
 
 ###Get all comments

@@ -30,7 +30,8 @@ const userSchema = mongoose.Schema({
   },
   picture: {
     type: String,
-    required: true,
+    required: false,
+    default:"example-user.png"
   },
   register: {
     type: String,
@@ -39,10 +40,12 @@ const userSchema = mongoose.Schema({
   web: {
     type: String,
     required: false,
+    default: "No Web"
   },
   admin:{
     type:Boolean,
-    required:true,
+    required:false,
+    default:false
   },
 },{versionKey:false});
 

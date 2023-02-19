@@ -7,7 +7,8 @@ create = async (req)=>{
 try {
    let hashedPassword = await crypt.createCrypt(req.body.password)
    const newUser = new user({
-    _id: req.body._id.replace("/","").replace("\\",""),
+    //_id: req.body._id.replace("/","").replace("\\",""),
+    _id: req.body._id,
     name: req.body.name,
     surname: req.body.surname,
     password: hashedPassword,
@@ -16,11 +17,12 @@ try {
     followers: [],
     picture: req.body.picture,
     register: moment().format('DD/MM/YYYY').toString(),
-    web:req.body.web,
-    admin:req.body.admin
-})
-return newUser;
+    web: req.body.web,
+    admin: req.body.admin
+  })
+  return newUser;
 } catch (error) {
+  console.log(error)
    return null
 }
 }

@@ -11,10 +11,11 @@ const multer  = require('multer');
 
 router.post("/register", async (request, response) => {
   try {
-    const newUser = await users.create(request)    
+    const newUser = await users.create(request)
     const userSaved = await newUser.save();
     await users.register(newUser,response)
   } catch (error) {
+    console.log(error)
     response.json({message:error});
   }
 });
