@@ -28,8 +28,13 @@ router.post("/login", async (request, response) => {
 //_____________________gets__________________________
 router.get("/", async (request, response) => {
   try {
+    const verified = token.verify(request.headers['authorization'])
+  if(verified){
     const users = await user.find();
     response.json({status:"200",data:users});
+  }else{
+    response.json({status:"403",message:"forbidden"})
+  }
   } catch (error) {
     response.json(error);
   }
@@ -59,9 +64,9 @@ router.delete("/:id", async (request, response) => {
   const { id } = request.params;
   try {
     const removed = await user.deleteOne({ _id: id });
-    response.json(removed);
+    response.json({status:"200",data:removed});
   } catch (error) {
-    response.json(error);
+    response.json({error:error});
   }
 });
 

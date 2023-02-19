@@ -13,48 +13,31 @@ create = async (req,res)=>{
       })
       return newComment;
    } catch (error) {
-      res.json({error})
+      res.json({error:error})
    }
 }
 
-updateDescription = async(req,res)=>{
+deleteComment = async (request,response)=>{
    try {
-
-      const { id } = req.params;
-     const {
-      post,
-      user,
-      description
-    } = req.body;
-
-    const updated = await comment.updateOne(
-      { _id: id,user:user,post:post },
-      {$set:{description}}
-    )
-      res.json({status:"200",data:updated})
-   } catch (error) {
-      res.json({error})
-   }
-}
-
-deleteComment = async(req,res)=>{
-   try {
-      const { id } = request.params;
-      const {user} = request.body
-      const commentToDelete = comment.findOne({_id:id,user:user})
-      if(commentToDelete){
-         const deleted = await comment.deleteOne(commentToDelete)
-         res.json({status:"200",data:deleted})
+      const {id,user} = request.query
+      const query = {_id:id,user:user}
+      console.log(id);
+      console.log(user);
+      const commentFinded = await comment.findOne(query)
+      console.log(commentFinded);
+      if(commentFinded){
+      const removed = await comment.deleteOne({_id:id})
+      response.json({status:"200",data:removed})
       }else{
-         res.json({status:"404",response:"Not Found"})
+      response.json({status:"404",response:"El comentario no es del usuario correspondiente"})
       }
+
    } catch (error) {
-      res.json({error})
+      response.json({error:error})
    }
 }
 
 module.exports = {
    create,
-   updateDescription,
    deleteComment
 } 

@@ -7,7 +7,12 @@ const create = (user) =>{
 
 const verify = (token)=>{
    const payload = jwt.verify(token,keys.key)
-   return payload
+   if(payload != null){
+      return true
+   }else{
+      return false
+   }
+
 }
 
 module.exports = {

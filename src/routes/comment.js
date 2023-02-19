@@ -3,6 +3,7 @@ const express = require("express");
 const comment = require("../models/comment");
 const comments = require("../middleware/commentFunc");
 const { request, response } = require("express");
+const { resolve } = require("path");
 const router = express.Router();
 
 router.get("/", async (request, response) => {
@@ -10,7 +11,7 @@ router.get("/", async (request, response) => {
       const comments = await comment.find();
       response.json({status:"200",data:comments});
     } catch (error) {
-      response.json(error);
+      response.json({error:error});
     }
 });
 router.get("/:post", async (request, response) => {
@@ -19,7 +20,7 @@ router.get("/:post", async (request, response) => {
       const comments = await comment.find({post:post});
       response.json({status:"200",data:comments});
     } catch (error) {
-      response.json(error);
+      response.json({error:error});
     }
 });
 
@@ -31,23 +32,36 @@ router.post("/", async (request,response)=>{
       response.json({status:"200",response:"comment created"})
    } catch (error) {
       console.log(error);
-      response.json({error})
+      response.json({error:error})
    }
 })
 
-router.put("/description/:id", async (request,response)=>{
+///users?username=johndoe&email=johndoe@example.com
+router.delete("/", async (request,response)=>{
    try {
-      const updatedComment = comments.updateDescription(request,response);
+      await comments.deleteComment(request,response)
    } catch (error) {
-      response.json({error})
+      response.json({error:error})
    }
 })
 
-router.delete("/:id",async (request,response)=>{
+router.put("/:id",async (request,response)=>{
    try {
-      comments.deleteComment(request.response)
+      const {id} = request.params
+      const {description} = request.body
+      console.log(description);
+      const updated = await comment.updateOne(
+         {_id:id},
+         {
+            $set:{
+               description,
+            }
+         }
+      )
+      response.json({status:"200",data:updated})
    } catch (error) {
-      response.json({error})
+      console.log(error);
+      response.json({error:error})
    }
 })
 
