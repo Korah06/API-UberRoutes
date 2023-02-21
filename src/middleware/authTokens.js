@@ -7,7 +7,7 @@ const create = (user) => {
 
 const verify = (token) => {
   const payload = jwt.verify(token, keys.key);
-  if (payload != null) {
+  if (payload) {
     return true;
   } else {
     return false;

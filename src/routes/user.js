@@ -28,6 +28,8 @@ router.post("/login", async (request, response) => {
   await users.login(request, response);
 });
 
+router.post("/loginlock", async (request, response) => {});
+
 //_____________________gets__________________________
 router.get("/", async (request, response) => {
   try {
@@ -78,6 +80,21 @@ router.put("/adm/:id", async (request, response) => {
     await users.admUpdate(request, response);
   } else {
     response.json(403);
+  }
+});
+
+router.put("/follow/:id", async (request, response) => {
+  try {
+    const verified = token.verify(
+      request.headers["authorization"].split(" ")[1]
+    );
+    if (verified) {
+      await users.updateFollowers(request, response);
+    } else {
+      response.json(403);
+    }
+  } catch (error) {
+    response.json({ status: "500", message: "server error" });
   }
 });
 
