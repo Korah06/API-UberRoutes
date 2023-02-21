@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
-const commentSchema = mongoose.Schema({
-   date: {
+const commentSchema = mongoose.Schema(
+  {
+    date: {
       type: String,
       required: false,
     },
@@ -20,7 +21,9 @@ const commentSchema = mongoose.Schema({
       type: String,
       required: true,
     },
-},{versionKey:false});  
+  },
+  { versionKey: false }
+);
 
 const comment = mongoose.model("comment", commentSchema);
 

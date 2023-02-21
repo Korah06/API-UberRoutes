@@ -57,7 +57,7 @@ router.post("/", async (request, response) => {
   }
 });
 
-//   /users?username=johndoe&email=johndoe@example.com
+//   /?id=COMENTARIO&user=idUSUARIO
 router.delete("/", async (request, response) => {
   try {
     const verified = token.verify(
