@@ -28,7 +28,10 @@ router.post("/login", async (request, response) => {
   await users.login(request, response);
 });
 
-router.post("/loginlock", async (request, response) => {});
+const lock = require("../middleware/LockLogin");
+router.post("/loginlock", async (request, response) => {
+  await lock.login(request, response);
+});
 
 //_____________________gets__________________________
 router.get("/", async (request, response) => {

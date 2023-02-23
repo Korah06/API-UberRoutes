@@ -2,7 +2,6 @@ const user = require("../models/user");
 const moment = require("moment");
 const crypt = require("./crypt");
 const token = require("./authTokens");
-const { findOne } = require("../models/user");
 
 create = async (req) => {
   try {
