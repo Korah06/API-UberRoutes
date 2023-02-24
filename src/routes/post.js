@@ -21,13 +21,15 @@ router.post("/create", async (request, response) => {
     if (verified) {
       const newPost = await posts.create(request);
       await newPost.save();
-      response.json({ status: "200", message: "Post creado correctamente" });
+      response
+        .status(200)
+        .json({ status: "200", message: "Post creado correctamente" });
     } else {
       response.json({ status: 403, message: "Forbidden" });
     }
   } catch (error) {
     console.log(error);
-    response.json({ status: "400", message: error });
+    response.status(400).json({ status: "400", message: error });
   }
 });
 
@@ -40,12 +42,12 @@ router.get("/", async (request, response) => {
 
     if (verified) {
       const posts = await post.find();
-      response.json({ status: "200", data: posts });
+      response.status(200).json({ status: "200", data: posts });
     } else {
-      response.json({ status: 403, message: "Forbidden" });
+      response.status(403).json({ status: 403, message: "Forbidden" });
     }
   } catch (error) {
-    response.json(error);
+    response.status(500).json({ status: "500", message: "Server error" });
   }
 });
 
@@ -58,12 +60,12 @@ router.get("/:id", async (request, response) => {
 
     if (verified) {
       const postFinded = await post.findById(id);
-      response.json({ status: "ok", data: postFinded });
+      response.status(200).json({ status: "200", data: postFinded });
     } else {
-      response.json({ status: "403", message: "forbidden" });
+      response.status(403).json({ status: "403", message: "forbidden" });
     }
   } catch (error) {
-    response.json(error);
+    response.status(500).json({ status: "500", message: "Server error" });
   }
 });
 
@@ -76,12 +78,12 @@ router.post("/byuser", async (request, response) => {
     if (verified) {
       const { user } = request.body;
       const posts = await post.find({ user: user });
-      response.json({ status: "200", data: posts });
+      response.status(200).json({ status: "200", data: posts });
     } else {
-      response.json({ status: "403", message: "forbidden" });
+      response.status(403).json({ status: "403", message: "forbidden" });
     }
   } catch (error) {
-    response.json(error);
+    response.status(500).json({ status: "500", message: "Server error" });
   }
 });
 
@@ -91,7 +93,7 @@ router.put("/:id", async (request, response) => {
   if (verified) {
     await posts.update(request, response);
   } else {
-    response.json({ status: "403", message: "forbidden" });
+    response.status(403).json({ status: "403", message: "forbidden" });
   }
 });
 
@@ -101,7 +103,7 @@ router.put("/admupdate/:id", async (request, response) => {
   if (verified) {
     await posts.admUpdate(request, response);
   } else {
-    response.json({ status: "403", message: "forbidden" });
+    response.status(403).json({ status: "403", message: "forbidden" });
   }
 });
 
@@ -115,12 +117,12 @@ router.delete("/:id", async (request, response) => {
     if (verified) {
       const removed = await post.deleteOne({ _id: id });
       await comment.deleteMany({ post: id });
-      response.json({ status: "200", data: removed });
+      response.status(200).json({ status: "200", data: removed });
     } else {
-      response.json({ status: "403", message: "forbidden" });
+      response.status(403).json({ status: "403", message: "forbidden" });
     }
   } catch (error) {
-    response.json({ error: error });
+    response.status(500).json({ status: "500", message: "Server error" });
   }
 });
 
@@ -133,7 +135,7 @@ app.get("/img/:image", (req, res) => {
   if (verified) {
     res.sendFile(path.join(__dirname, "img", req.params.image));
   } else {
-    response.json({ status: "403", message: "forbidden" });
+    response.status(403).json({ status: "403", message: "forbidden" });
   }
 });
 
@@ -171,12 +173,12 @@ router.put("/deleteimg/:id", async (req, res) => {
           $set: image,
         }
       );
-      res.json({ status: "200", post: updated });
+      res.status(200).json({ status: "200", post: updated });
     } else {
-      res.json({ status: "403", message: "forbidden" });
+      res.status(403).json({ status: "403", message: "forbidden" });
     }
   } catch (error) {
-    res.json({ status: "500", message: error });
+    res.status(500).json({ status: "500", message: error });
     console.log(error);
   }
 });

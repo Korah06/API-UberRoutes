@@ -66,9 +66,11 @@ update = async (req, res) => {
         },
       }
     );
-    res.json({ status: "200", post: updated });
+    res.status(200).json({ status: "200", post: updated });
   } catch (error) {
-    res.json({ status: "500", message: "No se ha podido actualizar" });
+    res
+      .status(500)
+      .json({ status: "500", message: "No se ha podido actualizar" });
   }
 };
 
@@ -88,9 +90,11 @@ admUpdate = async (req, res) => {
         },
       }
     );
-    res.json({ status: "200", post: updated });
+    res.status(200).json({ status: "200", post: updated });
   } catch (error) {
-    res.json({ status: "500", message: "No se ha podido actualizar" });
+    res
+      .status(500)
+      .json({ status: "500", message: "No se ha podido actualizar" });
   }
 };
 

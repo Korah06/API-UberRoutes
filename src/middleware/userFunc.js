@@ -39,18 +39,18 @@ login = async (req, res) => {
 
     if (validPassword) {
       const Token = token.create(_id);
-      res.json({ status: "200", token: Token, data: userFinded });
+      res.status(200).json({ status: "200", token: Token, data: userFinded });
     } else {
-      res.json({ status: "401" });
+      res.status(401).json({ status: "401", message: "forbidden" });
     }
   } catch (error) {
-    res.json({ status: "404", error: error });
+    res.status(404).json({ status: "404", message: "not found" });
   }
 };
 
 register = async (userRegistered, res) => {
   const Token = token.create(userRegistered._id);
-  res.json({ status: "200", token: Token });
+  res.status(200).json({ status: "200", token: Token });
 };
 
 update = async (req, res) => {
@@ -84,9 +84,11 @@ update = async (req, res) => {
         },
       }
     );
-    res.json({ status: "200", user: updated });
+    res.status(200).json({ status: "200", user: updated });
   } catch (error) {
-    res.json({ status: "500", message: "No se ha podido actualizar" });
+    res
+      .status(500)
+      .json({ status: "500", message: "No se ha podido actualizar" });
   }
 };
 
@@ -107,10 +109,12 @@ admUpdate = async (req, res) => {
       }
     );
 
-    res.json({ status: "200", user: updated });
+    res.status(200).json({ status: "200", user: updated });
   } catch (error) {
     console.log(error);
-    res.json({ status: "500", message: "No se ha podido actualizar" });
+    res
+      .status(500)
+      .json({ status: "500", message: "No se ha podido actualizar" });
   }
 };
 
@@ -144,9 +148,11 @@ updateFollowers = async (req, res) => {
       }
     );
 
-    res.json({ status: "200", following: updatedU, follower: updatedF });
+    res
+      .status(200)
+      .json({ status: "200", following: updatedU, follower: updatedF });
   } catch (error) {
-    res.json({ error: error });
+    res.status(500).json({ status: "500", message: "server error" });
   }
 };
 

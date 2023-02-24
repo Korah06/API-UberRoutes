@@ -14,12 +14,12 @@ router.get("/", async (request, response) => {
     );
     if (verified) {
       const comments = await comment.find();
-      response.json({ status: "200", data: comments });
+      response.status(200).json({ status: "200", data: comments });
     } else {
-      response.status(403);
+      response.status(403).json({ status: "403", message: "forbidden" });
     }
   } catch (error) {
-    response.json({ error: error });
+    response.status(500).json({ status: "500", message: "server error" });
   }
 });
 router.get("/:post", async (request, response) => {
@@ -30,12 +30,12 @@ router.get("/:post", async (request, response) => {
     if (verified) {
       const { post } = request.params;
       const comments = await comment.find({ post: post });
-      response.json({ status: "200", data: comments });
+      response.status(200).json({ status: "200", data: comments });
     } else {
-      response.status(403);
+      response.status(403).json({ status: "403", message: "forbidden" });
     }
   } catch (error) {
-    response.json({ error: error });
+    response.status(500).json({ status: "500", message: "server error" });
   }
 });
 
@@ -47,13 +47,13 @@ router.post("/", async (request, response) => {
     if (verified) {
       const newComment = await comments.create(request, response);
       await newComment.save();
-      response.json({ status: "200", response: "comment created" });
+      response.status(200).json({ status: "200", response: "comment created" });
     } else {
-      response.status(403);
+      response.status(403).json({ status: "403", message: "forbidden" });
     }
   } catch (error) {
     console.log(error);
-    response.json({ error: error });
+    response.status(500).json({ status: "500", message: "server error" });
   }
 });
 
@@ -66,10 +66,10 @@ router.delete("/", async (request, response) => {
     if (verified) {
       await comments.deleteComment(request, response);
     } else {
-      response.status(403);
+      response.status(403).json({ status: "403", message: "forbidden" });
     }
   } catch (error) {
-    response.json({ error: error });
+    response.status(500).json({ status: "500", message: "server error" });
   }
 });
 
@@ -81,10 +81,10 @@ router.delete("/adm/:id", async (request, response) => {
     if (verified) {
       await comments.admDelete(request, response);
     } else {
-      response.status(403);
+      response.status(403).json({ status: "403", message: "forbidden" });
     }
   } catch (error) {
-    response.json({ error: error });
+    response.status(500).json({ status: "500", message: "server error" });
   }
 });
 
@@ -108,11 +108,11 @@ router.put("/:id", async (request, response) => {
       );
       response.json({ status: "200", data: updated });
     } else {
-      response.status(403);
+      response.status(403).json({ status: "403", message: "forbidden" });
     }
   } catch (error) {
     console.log(error);
-    response.json({ error: error });
+    response.status(500).json({ status: "500", message: "server error" });
   }
 });
 

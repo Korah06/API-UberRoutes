@@ -13,7 +13,7 @@ create = async (req, res) => {
     });
     return newComment;
   } catch (error) {
-    res.json({ error: error });
+    res.status(500).json({ status: "500", message: "server error" });
   }
 };
 
@@ -27,15 +27,15 @@ deleteComment = async (request, response) => {
     console.log(commentFinded);
     if (commentFinded) {
       const removed = await comment.deleteOne({ _id: id });
-      response.json({ status: "200", data: removed });
+      response.status(200).json({ status: "200", data: removed });
     } else {
-      response.json({
+      response.status(404).json({
         status: "404",
         response: "El comentario no es del usuario correspondiente",
       });
     }
   } catch (error) {
-    response.json({ error: error });
+    response.status(500).json({ status: "200", message: "server error" });
   }
 };
 
@@ -43,9 +43,9 @@ admDelete = async (req, res) => {
   try {
     const { id } = req.params;
     const removed = await comment.deleteOne({ _id: id });
-    res.json({ status: "200", data: removed });
+    res.status(200).json({ status: "200", data: removed });
   } catch (error) {
-    response.json({ error: error });
+    response.status(500).json({ status: "500", message: "server error" });
   }
 };
 
